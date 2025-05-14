@@ -15,7 +15,7 @@ contract NFT is ERC721URIStorage {
     }
 
     modifier enoughFunds() {
-        require(msg.value >= 1, "You need at least 1 ether");
+        require(msg.value >= cost, "Insuffiecient funds");
         _;
     }
 
