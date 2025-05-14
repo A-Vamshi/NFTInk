@@ -24,7 +24,7 @@ contract NFT is ERC721URIStorage {
         _;
     }
 
-    function mint(string memory tokenURI) public payable enoughFunds {
+    function mint(string memory tokenURI) public payable enoughFunds returns(uint) {
         uint tokenId = _nextTokenId++;
         _mint(msg.sender, tokenId);
         _setTokenURI(tokenId, tokenURI);
@@ -32,7 +32,7 @@ contract NFT is ERC721URIStorage {
         return tokenId;
     }
 
-    function totalSupply() public view {
+    function totalSupply() public view returns(uint) {
         return _nextTokenId;
     }
 
