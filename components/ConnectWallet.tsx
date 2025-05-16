@@ -1,10 +1,11 @@
 import React from 'react'
 import { ethers } from "ethers";
 
-const ConnectWallet = ({ account, setAccount }) => {
+
+const ConnectWallet = ({ account, setAccount }: WalletArguments) => {
     const connectAccount = async () => {
-        const accounts = await window.ethereum.request({method: "eth_requestAccounts"});
-        const account = ethers.getAddress(accounts[0])
+        const accounts = await window.ethereum.request({method: "eth_requestAccounts", params: []});
+        const account = ethers.getAddress(accounts[0]);
         setAccount(account);
     }
   return (
