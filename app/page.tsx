@@ -1,7 +1,21 @@
+"use client";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import { ethers } from "ethers";
+import ConnectWallet from "../components/ConnectWallet";
 export default function Home() {
+  const [ account, setAccount ] = useState(null);
+  const [ provider, setProvider ] = useState();
+
+  const loadBlockChainData = async () => {
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    setProvider(provider);
+  }
+  useEffect(() => {
+    loadBlockChainData();
+  }, []);
+
+
   return (
     <div className="w-full h-screen flex items-center justify-center overflow-hidden">
     <div className="flex flex-col items-center justify-center">
@@ -19,12 +33,7 @@ export default function Home() {
               </div>
             </h2>
             <div className="flex items-center justify-center mt-10">
-              <button className="p-[3px] relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg" />
-                <div className="px-8 py-2  bg-black rounded-[6px]  relative group transition duration-200 text-white hover:bg-transparent">
-                  Connect your wallet
-                </div>
-              </button>
+              <ConnectWallet account={account} setAccount={setAccount} />
             </div>
           </div>
         </BackgroundBeamsWithCollision>
