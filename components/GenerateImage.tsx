@@ -14,7 +14,7 @@ const GenerateImage = () => {
   }
   
   const createImage = async () => {
-    const ai = new GoogleGenAI({ apiKey: "AIzaSyCpUavTBxSjuWoUn-bBVAmmtnLJUIyq36Q" });
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     const contents = "Create a tattoo image of " + description
     console.log(contents);
     const response = await ai.models.generateContent({
