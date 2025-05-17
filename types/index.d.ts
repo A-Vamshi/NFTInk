@@ -10,3 +10,15 @@ interface Window {
         request: (args: {method: string; params: any[]}) => Promise<any>,
     }
 }
+
+interface InputProps {
+    type: string,
+    placeholder: string,
+    className?: string,
+}
+
+interface ButtonProps {
+    handleClick: () => void,
+    text: string,
+    className?: string,
+}
