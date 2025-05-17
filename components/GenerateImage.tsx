@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { GoogleGenAI, Modality } from "@google/genai";
-import { NFTStorage, File } from "nft.storage";
+// import { NFTStorage, File } from "nft.storage";
 
 
-const GenerateImage = () => {
+const GenerateImage = ({ mint } : { mint: (args: string) => void }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState<string | null>(null);
@@ -15,21 +15,21 @@ const GenerateImage = () => {
     const data = createImage();
   }
   
-  const uploadData = async (imageData) => {
-    console.log("Uploading image");
-    const nftStorage = new NFTStorage({ token: process.env.NFT_STORAGE_API_KEY as string });
-    const { ipnft } = await nftStorage.store({
-      image: new File([imageData], "image.jpeg", { type : "image/jpeg"}),
-      name: name,
-      description:  description
-    });
-    const url = `https://ipfs.io/ipfs/${ipnft}/metadata.json`;
-    setUrl(url);
-    return url;
-  }
+  // const uploadData = async (imageData) => {
+  //   console.log("Uploading image");
+  //   const nftStorage = new NFTStorage({ token: process.env.NFT_STORAGE_API_KEY as string });
+  //   const { ipnft } = await nftStorage.store({
+  //     image: new File([imageData], "image.jpeg", { type : "image/jpeg"}),
+  //     name: name,
+  //     description:  description
+  //   });
+  //   const url = `https://ipfs.io/ipfs/${ipnft}/metadata.json`;
+  //   setUrl(url);
+  //   return url;
+  // }
   
   const createImage = async () => {
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     const contents = "Create a tattoo image of " + description;
     let imageUrl;
     console.log(contents);
@@ -51,8 +51,8 @@ const GenerateImage = () => {
         setImage(imageUrl);
       }
     }
-    const url = uploadData(imageUrl);
-    console.log(url);
+    // const url = uploadData(imageUrl);
+    await mint(url);
   }
 
   return (
