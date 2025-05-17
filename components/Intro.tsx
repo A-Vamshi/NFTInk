@@ -1,13 +1,11 @@
 "use client";
 import React, { useState } from 'react'
-import { BackgroundBeamsWithCollision } from './ui/background-beams-with-collision'
 import ConnectWallet from './ConnectWallet'
 
 const Intro = () => {
     const [account, setAccount] = useState("");
   return (
-    <div className="flex flex-col items-center justify-center">
-        <BackgroundBeamsWithCollision>
+    <div className="flex flex-col items-center justify-center min-h-[100vh] bg-neutral-900">
           <div className="flex flex-col items-center justify-center">
             <h2 className="text-2xl relative z-20 md:text-4xl lg:text-7xl font-bold text-center text-black dark:text-white font-sans tracking-tight">
               Generate your tatoos using AI{" "}
@@ -24,7 +22,6 @@ const Intro = () => {
               <ConnectWallet account={account} setAccount={setAccount} />
             </div>
           </div>
-        </BackgroundBeamsWithCollision>
     </div>
   )
 }
