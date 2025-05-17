@@ -1,21 +1,37 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { GoogleGenAI, Modality } from "@google/genai";
+import { NFTStorage, File } from "nft.storage";
 
 
 const GenerateImage = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState<string | null>(null);
+  const [url, setUrl] = useState("");
   
   const handleClick = (e) => {
     e.preventDefault();
-    createImage();
+    const data = createImage();
+  }
+  
+  const uploadData = async (imageData) => {
+    console.log("Uploading image");
+    const nftStorage = new NFTStorage({ token: process.env.NFT_STORAGE_API_KEY as string });
+    const { ipnft } = await nftStorage.store({
+      image: new File([imageData], "image.jpeg", { type : "image/jpeg"}),
+      name: name,
+      description:  description
+    });
+    const url = `https://ipfs.io/ipfs/${ipnft}/metadata.json`;
+    setUrl(url);
+    return url;
   }
   
   const createImage = async () => {
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-    const contents = "Create a tattoo image of " + description
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
+    const contents = "Create a tattoo image of " + description;
+    let imageUrl;
     console.log(contents);
     const response = await ai.models.generateContent({
       model: "gemini-2.0-flash-preview-image-generation",
@@ -31,10 +47,12 @@ const GenerateImage = () => {
         const imageData = part.inlineData.data;
         const binaryData = Buffer.from(imageData, 'base64');
         const blob = new Blob([binaryData], { type: 'image/png' });
-        const imageUrl = URL.createObjectURL(blob);
+        imageUrl = URL.createObjectURL(blob);
         setImage(imageUrl);
       }
     }
+    const url = uploadData(imageUrl);
+    console.log(url);
   }
 
   return (
