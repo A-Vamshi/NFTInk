@@ -19,6 +19,7 @@
     "metamask": "^0.0.1-security",
     "motion": "^12.11.3",
     "next": "15.3.2",
+    "nft.storage": "^7.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-element-to-jsx-string": "^17.0.1",
