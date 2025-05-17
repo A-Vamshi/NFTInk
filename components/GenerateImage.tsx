@@ -29,7 +29,7 @@ const GenerateImage = ({ mint } : { mint: (args: string) => void }) => {
   // }
   
   const createImage = async () => {
-    const ai = new GoogleGenAI({ apiKey: "AIzaSyCpUavTBxSjuWoUn-bBVAmmtnLJUIyq36Q" });
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     const contents = "Create a tattoo image of " + description;
     let imageUrl;
     console.log(contents);
