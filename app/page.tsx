@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import Intro from "@/components/Intro";
+import GenerateImage from "@/components/GenerateImage";
 export default function Home() {
   const [provider, setProvider] = useState<ethers.BrowserProvider | null>(null);
   const loadBlockChainData = async () => {
@@ -15,8 +16,9 @@ export default function Home() {
 
 
   return (
-    <div className="w-full h-screen flex items-center justify-center overflow-hidden">
+    <div className="flex flex-col h-full w-full items-center justify-center">
       <Intro />
+      <GenerateImage />
     </div>
   );
 }
