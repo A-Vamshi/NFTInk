@@ -1,11 +1,5 @@
 import React from 'react'
 
-interface InputProps {
-    type: string,
-    placeholder: string,
-    className?: string,
-}
-
 const Input = ({ type, placeholder, className } : InputProps) => {
   return (
     <>

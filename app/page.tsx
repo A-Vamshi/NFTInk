@@ -9,7 +9,6 @@ export default function Home() {
     const provider = new ethers.BrowserProvider(window.ethereum);
     setProvider(provider);
   }
-  console.log("Provider: ", provider);
   useEffect(() => {
     loadBlockChainData();
   }, []);

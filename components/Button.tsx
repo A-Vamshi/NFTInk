@@ -1,11 +1,5 @@
 import React from 'react'
 
-interface ButtonProps {
-    handleClick: () => void,
-    text: string,
-    className?: string,
-}
-
 const Button = ({ handleClick, text, className } : ButtonProps ) => {
   return (
     <button className={`p-[3px] relative ${className}`} onClick={handleClick}>
