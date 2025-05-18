@@ -53,14 +53,13 @@
     - Payment of 1 ETH to mint
 
 ## 📷 Demo
-<img src="/images/1.png" alt="screenshot" width="200"/> <img src="/images/2.png" alt="screenshot" width="200"/>
-<img src="/images/3.png" alt="screenshot" width="200"/>
-<img src="/images/4.png" alt="screenshot" width="200"/>
-<img src="/images/5.png" alt="screenshot" width="200"/>
-<img src="/images/6.png" alt="screenshot" width="200"/>
-<img src="/images/7.png" alt="screenshot" width="200"/>
-<img src="/images/8.png" alt="screenshot" width="200"/>
-<img src="/images/9.png" alt="screenshot" width="200"/>
+<img src="/images/1.png" alt="screenshot" width="1000"/> <img src="/images/2.png" alt="screenshot" width="1000"/>
+<img src="/images/3.png" alt="screenshot" width="1000"/>
+<img src="/images/4.png" alt="screenshot" width="1000"/>
+<img src="/images/5.png" alt="screenshot" width="1000"/>
+<img src="/images/7.png" alt="screenshot" width="1000"/>
+<img src="/images/8.png" alt="screenshot" width="1000"/>
+<img src="/images/9.png" alt="screenshot" width="500"/>
 
 
 ---
