@@ -17,6 +17,8 @@ const GenerateImage = ({ mint } : { mint: (args: string) => void }) => {
       window.alert("Please enter the name and description");
       return;
     }
+    setImage(null);
+    setUrl("");
     const data = createImage();
   }
   
