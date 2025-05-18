@@ -2,8 +2,8 @@
 import React, { useState } from 'react'
 import ConnectWallet from './ConnectWallet'
 
-const Intro = () => {
-    const [account, setAccount] = useState("");
+const Intro = ({nft}) => {
+    const [account, setAccount] = useState<string | null>(null);
   return (
     <div className="flex flex-col items-center justify-center min-h-[100vh] bg-neutral-900">
           <div className="flex flex-col items-center justify-center">
@@ -19,7 +19,7 @@ const Intro = () => {
               </div>
             </h2>
             <div className="flex items-center justify-center mt-10">
-              <ConnectWallet account={account} setAccount={setAccount} />
+              <ConnectWallet account={account} setAccount={setAccount} nft={nft} />
             </div>
           </div>
     </div>

@@ -3,11 +3,15 @@ import { ethers } from "ethers";
 import Button from './Button';
 
 
-const ConnectWallet = ({ account, setAccount }: WalletArguments) => {
+const ConnectWallet = ({ account, setAccount, nft }: WalletArguments) => {
     const connectAccount = async () => {
-        const accounts = await window.ethereum.request({method: "eth_requestAccounts", params: []});
-        const account = ethers.getAddress(accounts[0]);
-        setAccount(account);
+        if (!account) {
+          const accounts = await window.ethereum.request({method: "eth_requestAccounts", params: []});
+          const account = ethers.getAddress(accounts[0]);
+          setAccount(account);
+        } else {
+          window.alert(nft ? "Contract successfully deployed" : "Contract isn't deployed");
+        }
     }
   return (
     <Button handleClick={connectAccount} text={

@@ -1,17 +1,22 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { GoogleGenAI, Modality } from "@google/genai";
-// import { NFTStorage, File } from "nft.storage";
+import Spinner from "react-bootstrap/Spinner";
 
 
 const GenerateImage = ({ mint } : { mint: (args: string) => void }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [url, setUrl] = useState("");
   
   const handleClick = (e) => {
     e.preventDefault();
+    if (name == "" || description == "") {
+      window.alert("Please enter the name and description");
+      return;
+    }
     const data = createImage();
   }
   
@@ -29,7 +34,8 @@ const GenerateImage = ({ mint } : { mint: (args: string) => void }) => {
   // }
   
   const createImage = async () => {
-    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    setIsLoading(true);
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
     const contents = "Create a tattoo image of " + description;
     let imageUrl;
     console.log(contents);
@@ -49,10 +55,12 @@ const GenerateImage = ({ mint } : { mint: (args: string) => void }) => {
         const blob = new Blob([binaryData], { type: 'image/png' });
         imageUrl = URL.createObjectURL(blob);
         setImage(imageUrl);
+        setUrl(imageUrl);
       }
     }
     // const url = uploadData(imageUrl);
     await mint(url);
+    setIsLoading(false);
   }
 
   return (
@@ -71,15 +79,22 @@ const GenerateImage = ({ mint } : { mint: (args: string) => void }) => {
           <input type="submit" value="Create & mint" className='border-2 border-t-violet-500 border-l-violet-500 border-b-purple-500 border-r-purple-500 rounded-md hover:bg-violet-500 hover:cursor-pointer p-2'></input>
         </form>
         <div className='h-[50vh] w-[50vh] border-2 flex items-center justify-center border-t-violet-500 border-l-violet-500 border-b-purple-500 border-r-purple-500 rounded-md'>
-          <Image src={image ? image : ""} width={500} height={500} alt="AI Generated Image" />
+          <div className='flex justify-center items-center w-full h-full'>
+            {
+              !image && isLoading ? (
+                <p className='text-2xl font-bold'>Loading...</p>
+              ) : !image && !isLoading ? (
+                <p className='text-2xl font-bold text-center'>Enter the deatils and mint your NFT now!</p>
+              ) : (
+                <Image src={image} alt="AI Generated tattoo" width={500} height={500} />
+              )
+            }
+          </div>
         </div>
       </div>
-      <p className='my-5'>View <a href="https://www.google.com" target='_blank' rel='noreferrer' className='text-blue-600 font-mono'>metadata</a></p>
+        {url ? <p className='text-fuchsia-600 text-2xl m-5 font-mono'>Your nft has been created!</p> : <></>}
     </div>
   )
 }
 
-export default GenerateImage
-/**
-  
- */
+export default GenerateImage;

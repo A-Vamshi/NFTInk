@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 interface WalletArguments {
-  account: string,
+  account: string | null,
   setAccount: (arg : string) => void,
 }
 

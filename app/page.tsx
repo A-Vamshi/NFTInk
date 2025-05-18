@@ -9,9 +9,6 @@ import config from "../config.json";
 export default function Home() {
   const [provider, setProvider] = useState<ethers.BrowserProvider | null>(null);
   const [nft, setNft] = useState(null);
-
-
-
   const loadBlockChainData = async () => {
     const provider = new ethers.BrowserProvider(window.ethereum);
     setProvider(provider);
@@ -32,7 +29,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col h-full w-full items-center justify-center">
-      <Intro />
+      <Intro nft={nft}/>
       <GenerateImage mint={mint} />
     </div>
   );
